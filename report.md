@@ -1,9 +1,12 @@
+# Carbon Emission Monitoring & Forecasting —  Report
+
+
 ### A) `simulate_data.py` — Dataset Generator
 
 **Purpose:**  
 Generates a realistic, noisy time series of hourly CO₂ emissions for multiple industries and saves it to a CSV file used by the rest of the pipeline.
 
----
+
 
 **Key Components:**
 
@@ -23,7 +26,7 @@ Generates a realistic, noisy time series of hourly CO₂ emissions for multiple 
     simulated_data/industry_co2_emissions.csv
     ```
 
----
+
 
 **CSV Structure:**
 
@@ -41,7 +44,6 @@ Generates a realistic, noisy time series of hourly CO₂ emissions for multiple 
 **Purpose:**  
 Loads the simulated CO₂ dataset, filters it for a given industry, scales the values, and prepares the data for LSTM model training.
 
----
 
 **Key Components:**
 
@@ -63,7 +65,7 @@ Loads the simulated CO₂ dataset, filters it for a given industry, scales the v
   6. **Create sliding windows**  
      Prepares `X` (features) and `y` (labels) based on `look_back` hours.
 
----
+
 
 **Inputs:**
 - `industry_id` — Integer (1 to 5 in current dataset)
@@ -83,7 +85,6 @@ Loads the simulated CO₂ dataset, filters it for a given industry, scales the v
 **Purpose:**  
 Trains an LSTM model for a specific industry’s CO₂ emissions using the preprocessed data and saves the trained model.
 
----
 
 **Key Components:**
 
@@ -115,7 +116,6 @@ Trains an LSTM model for a specific industry’s CO₂ emissions using the prepr
 **Purpose:**  
 Runs the full pipeline: loads the latest actuals, forecasts future CO₂ emissions, checks compliance, and prints a report.
 
----
 
 **Key Components:**
 
@@ -141,7 +141,6 @@ Runs the full pipeline: loads the latest actuals, forecasts future CO₂ emissio
 **Purpose:**  
 Evaluates whether an industry’s monthly CO₂ emissions are within approved limits.
 
----
 
 **Key Components:**
 
@@ -151,22 +150,13 @@ Evaluates whether an industry’s monthly CO₂ emissions are within approved li
     - `"Approved"` if emissions are within limit.
     - `"Flagged"` if emissions exceed limit.
 
----
+
 
 **Inputs:**
 - `total_month_kg` — Float, total CO₂ emissions for a month in kg.
 
 **Outputs:**
 - String: `"Approved"` or `"Flagged"`
-
----
-
-**Example Usage:**
-```python
-from compliance import compliance_report
-
-status = compliance_report(125000)
-print(status)  # "Flagged" or "Approved"
 
 
 
