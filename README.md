@@ -62,7 +62,7 @@ The system:
 
 ---
 
-## 📥 Installation
+## Installation
 ```bash
 git clone https://github.com/Harshvardhan1113/capstone-ml.git
 
