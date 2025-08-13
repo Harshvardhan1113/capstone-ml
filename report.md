@@ -108,6 +108,65 @@ Trains an LSTM model for a specific industry’s CO₂ emissions using the prepr
 - Saved LSTM model (`.h5` format)
 
 ---
+---
+
+### D) `pipeline.py` — Forecasting & Compliance Check
+
+**Purpose:**  
+Runs the full pipeline: loads the latest actuals, forecasts future CO₂ emissions, checks compliance, and prints a report.
+
+---
+
+**Key Components:**
+
+- **Actual Data Load:**  
+  Gets the last 30 days of actual CO₂ emissions for the industry.
+
+- **Forecasting (Recursive LSTM):**  
+  Uses the trained LSTM to predict the next month’s emissions hour-by-hour.
+
+- **Compliance Check:**  
+  Passes total forecasted monthly emissions to `compliance_report()`.
+
+- **Reporting:**  
+  Displays in console:
+  - Industry ID
+  - Last 30 days actuals compliance status
+  - Next month forecast compliance status
+
+---
+---
+### E) `compliance.py` — Compliance Logic
+
+**Purpose:**  
+Evaluates whether an industry’s monthly CO₂ emissions are within approved limits.
+
+---
+
+**Key Components:**
+
+- **`compliance_report(total_month_kg)`**  
+  - Compares `total_month_kg` against a predefined compliance threshold.
+  - Returns:
+    - `"Approved"` if emissions are within limit.
+    - `"Flagged"` if emissions exceed limit.
+
+---
+
+**Inputs:**
+- `total_month_kg` — Float, total CO₂ emissions for a month in kg.
+
+**Outputs:**
+- String: `"Approved"` or `"Flagged"`
+
+---
+
+**Example Usage:**
+```python
+from compliance import compliance_report
+
+status = compliance_report(125000)
+print(status)  # "Flagged" or "Approved"
 
 
 
