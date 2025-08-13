@@ -37,6 +37,7 @@ Generates a realistic, noisy time series of hourly CO₂ emissions for multiple 
 | `co2_kg`         | float    | CO₂ emissions per hour (kg)                      |
 | `interval_hours` | int      | Interval size (currently `1`)                    |
 
+![Dataset Generated](screenshots/data_generated.png)
 ---
 ---
 ### B) `data_prep.py` — Data Preprocessing
@@ -76,6 +77,8 @@ Loads the simulated CO₂ dataset, filters it for a given industry, scales the v
 - `y` — Target values
 - `scaler` — Fitted MinMaxScaler (used later for inverse transform)
 
+![Dataset Generated](screenshots/data_prep.png)
+
 ---
 ---
 
@@ -108,10 +111,37 @@ Trains an LSTM model for a specific industry’s CO₂ emissions using the prepr
 **Outputs:**
 - Saved LSTM model (`.h5` format)
 
+![Dataset Generated](screenshots/model_saved.png)
+
 ---
 ---
 
-### D) `pipeline.py` — Forecasting & Compliance Check
+### D) `compliance.py` — Compliance Logic
+
+**Purpose:**  
+Evaluates whether an industry’s monthly CO₂ emissions are within approved limits.
+
+
+**Key Components:**
+
+- **`compliance_report(total_month_kg)`**  
+  - Compares `total_month_kg` against a predefined compliance threshold.
+  - Returns:
+    - `"Approved"` if emissions are within limit.
+    - `"Flagged"` if emissions exceed limit.
+
+
+**Inputs:**
+- `total_month_kg` — Float, total CO₂ emissions for a month in kg.
+
+**Outputs:**
+- String: `"Approved"` or `"Flagged"`
+
+![Dataset Generated](screenshots/compliance.png)
+
+---
+---
+### E) `pipeline.py` — Forecasting & Compliance Check
 
 **Purpose:**  
 Runs the full pipeline: loads the latest actuals, forecasts future CO₂ emissions, checks compliance, and prints a report.
@@ -133,31 +163,10 @@ Runs the full pipeline: loads the latest actuals, forecasts future CO₂ emissio
   - Industry ID
   - Last 30 days actuals compliance status
   - Next month forecast compliance status
+    
+![Dataset Generated](screenshots/pipeline_forecast.png)
 
 ---
 ---
-### E) `compliance.py` — Compliance Logic
-
-**Purpose:**  
-Evaluates whether an industry’s monthly CO₂ emissions are within approved limits.
-
-
-**Key Components:**
-
-- **`compliance_report(total_month_kg)`**  
-  - Compares `total_month_kg` against a predefined compliance threshold.
-  - Returns:
-    - `"Approved"` if emissions are within limit.
-    - `"Flagged"` if emissions exceed limit.
-
-
-
-**Inputs:**
-- `total_month_kg` — Float, total CO₂ emissions for a month in kg.
-
-**Outputs:**
-- String: `"Approved"` or `"Flagged"`
-
-
 
 
