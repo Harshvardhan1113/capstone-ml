@@ -1,7 +1,7 @@
 # Carbon Emission Monitoring & Compliance Forecasting
 
 An AI-powered pipeline to monitor, analyze, and forecast industrial carbon emissions.  
-Integrates IoT-based real-time data collection, ARIMA-based forecasting, and compliance checks to flag industries exceeding their emission quotas.
+Integrates IoT-based real-time data collection, LSTM-based forecasting, and compliance checks to flag industries exceeding their emission quotas.
 
 ---
 
@@ -9,7 +9,7 @@ Integrates IoT-based real-time data collection, ARIMA-based forecasting, and com
 This project is part of a sustainability initiative to ensure industries remain within their assigned carbon emission limits.  
 The system:
 - Ingests real-time or historical emission data.
-- Trains an ARIMA model to forecast emissions for the next month.
+- Trains an LSTM model to forecast emissions for the next month.
 - Checks forecasts against compliance quotas.
 - Generates alerts/reports for any potential violations.
 - Can integrate with blockchain for transparent record-keeping.
@@ -18,7 +18,7 @@ The system:
 
 ## Features
 - **Real-time monitoring** of carbon emissions from IoT sensors.
-- **Forecasting** next month’s emissions using ARIMA.
+- **Forecasting** next month’s emissions using LSTM.
 - **Compliance checks** against assigned quotas.
 - **Flagging mechanism** for industries likely to exceed limits.
 - **Automated report generation** for stakeholders.
@@ -28,10 +28,8 @@ The system:
 ## Tech Stack
 - **Python** (Data processing, forecasting, compliance logic)
 - **Pandas** (Data handling)
-- **Statsmodels** (ARIMA forecasting)
-- **Matplotlib** (Optional visualization)
+- **Statsmodels** (LSTM forecasting)
 - **HDF5 (.h5)** for storing trained models
-- *(Optional)* Blockchain layer for immutable compliance logs
 
 ---
 
@@ -46,7 +44,7 @@ The system:
      ```
 
 2. **Model Training**  
-   - ARIMA model is trained on historical emission data.
+   - LSTM model is trained on historical emission data.
    - Model is saved as `.h5` for reuse.
 
 3. **Forecasting & Compliance**  
